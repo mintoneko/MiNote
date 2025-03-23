@@ -1,0 +1,55 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'net.micode.notes'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.loliowo.minote"
+        minSdk 35
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    useLibrary 'org.apache.http.legacy'  // 添加apache兼容
+
+    android {
+        packagingOptions {
+            exclude 'mozilla/public-suffix-list.txt'
+            resources.excludes.add("META-INF/DEPENDENCIES")
+        }
+    }
+
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    implementation libs.firebase.crashlytics.buildtools
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+    // 排除 Firebase 库中的重定位 Apache 依赖
+    implementation ('com.google.firebase:firebase-crashlytics-buildtools:2.9.9') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+}
