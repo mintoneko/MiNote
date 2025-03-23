@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     // 排除 Firebase 库中的重定位 Apache 依赖
-    implementation ('com.google.firebase:firebase-crashlytics-buildtools:2.9.9') {
+    implementation (libs.firebase.crashlytics.buildtools.v299) {
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
     }
 }
