@@ -7,7 +7,17 @@ import net.micode.notes.R;
 import net.micode.notes.ui.NotesPreferenceActivity;
 
 /**
- * 资源解析工具类，用于管理笔记应用的UI资源
+ * 笔记应用资源解析工具类
+ *
+ * 核心功能：
+ * 1. 统一管理UI相关的颜色、尺寸、背景等资源ID
+ * 2. 提供多场景背景资源访问接口（编辑界面/列表项/桌面小部件）
+ * 3. 处理文字样式的动态加载逻辑
+ *
+ * 设计规范：
+ * - 采用静态常量定义资源ID，避免魔法数值
+ * - 通过嵌套类实现资源分类管理
+ * - 所有资源访问方法均进行数组越界保护
  */
 public class ResourceParser {
   // 背景颜色常量标识

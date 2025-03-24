@@ -18,7 +18,19 @@ import net.micode.notes.ui.NotesListAdapter.AppWidgetAttribute;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-
+/**
+ * 数据库操作核心工具类
+ *
+ * 主要职责：
+ * 1. 提供批量数据库操作（删除/移动/查询）的原子性保证
+ * 2. 管理笔记与电话功能的关联数据
+ * 3. 维护小部件与笔记数据的关联关系
+ *
+ * 重要特性：
+ * - 所有数据库操作均包含异常处理机制
+ * - 查询方法均实现游标安全管理（自动关闭）
+ * - 支持内容提供者的批量操作（ContentProviderOperation）
+ */
 public class DataUtils {
   public static final String TAG = "DataUtils";
 

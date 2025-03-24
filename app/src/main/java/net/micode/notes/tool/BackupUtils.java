@@ -20,11 +20,18 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 
-/*
- * 数据分类导出：优先处理通话记录文件夹，然后是普通文件夹，最后导出根目录笔记
- * 格式规范化：使用R.array.format_for_exported_note定义文本格式模板
- * 异常处理：捕获SecurityException/IOException等系统级异常
- * 文件管理：自动创建带时间戳的文件（格式：/sdcard/micronotes/note_yyyyMMdd.txt）
+/**
+ * 笔记数据备份核心工具类
+ *
+ * 核心功能：
+ * 1. 实现笔记数据到文本文件的完整导出流程
+ * 2. 保障备份操作的原子性（全量导出或失败回滚）
+ * 3. 多线程安全设计（单例模式+同步锁）
+ *
+ * 备份策略：
+ * - 文件命名：note_yyyyMMdd.txt（防止重复覆盖）
+ * - 存储路径：/sdcard/micronotes/
+ * - 编码格式：UTF-8
  */
 public class BackupUtils {
   private static final String TAG = "BackupUtils";
