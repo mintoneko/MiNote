@@ -28,7 +28,7 @@ public class NoteWidgetProvider_2x extends NoteWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.update(context, appWidgetManager, appWidgetIds);
-    }
+    }11111111111
 
     @Override
     protected int getLayoutId() {
