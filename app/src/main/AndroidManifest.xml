@@ -5,6 +5,7 @@
 
   <!-- 已删除 <uses-sdk> 标签，minSdkVersion 改由 build.gradle 配置 -->
 
+  <!-- 应用权限声明 -->
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
@@ -16,11 +17,12 @@
   <uses-permission android:name="android.permission.USE_CREDENTIALS" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+  <!-- 应用全局配置 -->
   <application
     android:icon="@drawable/icon_app"
     android:label="@string/app_name" >
 
-    <!-- 为所有包含 intent-filter 的组件添加 android:exported -->
+    <!-- 主入口Activity -->
     <activity
       android:name=".ui.NotesListActivity"
       android:configChanges="keyboardHidden|orientation|screenSize"
