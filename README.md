@@ -216,3 +216,5 @@ graph TD
        API -->|HTTPS| Google[Google Tasks API]
        Widget[NoteWidgetProvider] --> UI
    ```
+
+## 新功能
