@@ -26,7 +26,7 @@ import android.util.Log;
 import java.util.HashMap;
 
 public class Contact {
-    private static HashMap<String, String> sContactCache;
+    private static HashMap<String, String> sContactCache;//ggbond
     private static final String TAG = "Contact";
 
     private static final String CALLER_ID_SELECTION = "PHONE_NUMBERS_EQUAL(" + Phone.NUMBER
