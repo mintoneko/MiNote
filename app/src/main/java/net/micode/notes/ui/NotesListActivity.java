@@ -39,6 +39,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
+import net.micode.notes.R;
 
 public class NotesListActivity extends Activity implements OnClickListener, OnItemLongClickListener {
   private static final int FOLDER_NOTE_LIST_QUERY_TOKEN = 0;
@@ -121,15 +123,30 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
   private final static int REQUEST_CODE_OPEN_NODE = 102;
   private final static int REQUEST_CODE_NEW_NODE = 103;
 
+
+  private int currentBgIndex = 1;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.note_list);
     initResources();
 
-    /**
-     * Insert an introduction when user firstly use this application
-     */
+    // 新增代码：获取布局和按钮
+    FrameLayout mainLayout = findViewById(R.id.main_layout);
+    Button changeBgBtn = findViewById(R.id.btn_change_bg);
+
+    // 设置背景切换点击事件
+    changeBgBtn.setOnClickListener(v -> {
+      currentBgIndex = currentBgIndex % 3 + 1; // 循环1-2-3
+      int resId = getResources().getIdentifier(
+        "list_background" + currentBgIndex,
+        "drawable",
+        getPackageName()
+      );
+      mainLayout.setBackgroundResource(resId);
+    });
+
+    // 原有代码保持不变
     setAppInfoFromRawRes();
   }
 
