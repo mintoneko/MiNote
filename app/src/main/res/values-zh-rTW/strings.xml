@@ -120,6 +120,8 @@
     <string name="search">便籤</string>
     <string name="datetime_dialog_ok">設置</string>
     <string name="datetime_dialog_cancel">取消</string>
+  <string name="change_background">切换背景</string>
+    <string name="change_font">更改字体</string>
     <plurals name="search_results_title">
         <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 條符合”<xliff:g id="SEARCH">%2$s</xliff:g>“的搜尋結果</item>
     </plurals>

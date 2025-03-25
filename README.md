@@ -95,26 +95,26 @@ java
             │   ├── GTaskStringUtils.java                 # Google任务字符串处理工具
             │   └── ResourceParser.java                   # 资源解析工具类
             │
-            ├── ui                                     # 用户界面相关组件
-            │   ├── AlarmAlertActivity.java              # 闹钟提醒对话框
-            │   ├── AlarmInitReceiver.java               # 开机启动广播接收器
-            │   ├── AlarmReceiver.java                   # 闹钟事件广播接收器
-            │   ├── DateTimePicker.java                  # 日期时间选择器控件
-            │   ├── DateTimePickerDialog.java            # 日期时间选择对话框
-            │   ├── DropdownMenu.java                    # 自定义下拉菜单控件
-            │   ├── FoldersListAdapter.java              # 文件夹列表适配器
-            │   ├── NoteEditActivity.java                # 便签编辑界面Activity
-            │   ├── NoteEditText.java                    # 富文本编辑控件
-            │   ├── NoteItemData.java                    # 列表项数据封装类
-            │   ├── NotesListActivity.java               # 主列表界面Activity
-            │   ├── NotesListAdapter.java                # 主列表数据适配器
-            │   ├── NotesListItem.java                   # 列表项自定义View
-            │   └── NotesPreferenceActivity.java         # 设置界面Activity
+            ├── ui                                      # 用户界面相关组件
+            │   ├── AlarmAlertActivity.java               # 闹钟提醒对话框
+            │   ├── AlarmInitReceiver.java                # 开机启动广播接收器
+            │   ├── AlarmReceiver.java                    # 闹钟事件广播接收器
+            │   ├── DateTimePicker.java                   # 日期时间选择器控件
+            │   ├── DateTimePickerDialog.java             # 日期时间选择对话框
+            │   ├── DropdownMenu.java                     # 自定义下拉菜单控件
+            │   ├── FoldersListAdapter.java               # 文件夹列表适配器
+            │   ├── NoteEditActivity.java                 # 便签编辑界面Activity
+            │   ├── NoteEditText.java                     # 富文本编辑控件
+            │   ├── NoteItemData.java                     # 列表项数据封装类
+            │   ├── NotesListActivity.java                # 主列表界面Activity
+            │   ├── NotesListAdapter.java                 # 主列表数据适配器
+            │   ├── NotesListItem.java                    # 列表项自定义View
+            │   └── NotesPreferenceActivity.java          # 设置界面Activity
             │
-            └── widget                                 # 桌面小部件实现
-                ├── NoteWidgetProvider.java              # 基础尺寸便签小部件
-                ├── NoteWidgetProvider_2x.java           # 2x尺寸便签小部件
-                └── NoteWidgetProvider_4x.java           # 4x尺寸便签小部件
+            └── widget                                  # 桌面小部件实现
+                ├── NoteWidgetProvider.java               # 基础尺寸便签小部件
+                ├── NoteWidgetProvider_2x.java            # 2x尺寸便签小部件
+                └── NoteWidgetProvider_4x.java            # 4x尺寸便签小部件
 ```
 
 ### 流程图

@@ -18,7 +18,7 @@
 <FrameLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/list_background"
+    android:background="@drawable/list_background1"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
