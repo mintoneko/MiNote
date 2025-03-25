@@ -1,33 +1,43 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.gtask.exception;
 
+/**
+ * 表示在任务同步过程中发生网络通信失败时抛出的受检异常。
+ * <p>
+ * 当与服务器进行网络交互（如身份验证、数据同步等操作）出现连接超时、
+ * 服务器无响应或HTTP状态码异常等情况时，应抛出此异常。
+ *
+ * @see
+ */
 public class NetworkFailureException extends Exception {
-    private static final long serialVersionUID = 2107610287180234136L;
+  private static final long serialVersionUID = 2107610287180234136L;
 
-    public NetworkFailureException() {
-        super();
-    }
+  /**
+   * 构造一个不带详细信息和原因的新网络异常
+   *
+   * @see Exception#Exception()
+   */
+  public NetworkFailureException() {
+    super();
+  }
 
-    public NetworkFailureException(String paramString) {
-        super(paramString);
-    }
+  /**
+   * 构造带有详细信息的网络异常
+   *
+   * @param paramString 异常描述信息
+   * @see Exception#Exception(String)
+   */
+  public NetworkFailureException(String paramString) {
+    super(paramString);
+  }
 
-    public NetworkFailureException(String paramString, Throwable paramThrowable) {
-        super(paramString, paramThrowable);
-    }
+  /**
+   * 构造包含详细信息和根本原因的网络异常
+   *
+   * @param paramString    异常描述信息
+   * @param paramThrowable 异常触发原因
+   * @see Exception#Exception(String, Throwable)
+   */
+  public NetworkFailureException(String paramString, Throwable paramThrowable) {
+    super(paramString, paramThrowable);
+  }
 }
