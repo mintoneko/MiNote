@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.gtask.remote;
 
 import android.app.Activity;
@@ -47,7 +31,21 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
-
+/**
+ * Google 任务同步管理器（单例模式）
+ *
+ * 核心职责：
+ * 1. 管理本地笔记与Google Tasks服务之间的双向同步
+ * 2. 处理同步状态机（成功/网络错误/内部错误等状态）
+ * 3. 维护本地与远程数据的映射关系
+ * 4. 协调任务列表、元数据和具体笔记的同步流程
+ *
+ * 主要组件：
+ * - 同步状态常量：定义6种同步状态（成功/网络错误/进行中等）
+ * - 数据映射表：维护gid-nid双向映射、任务列表缓存等数据结构
+ * - 同步处理器：实现init/sync/update等核心同步逻辑
+ * - 异常处理：捕获网络异常和内部操作异常
+ */
 public class GTaskManager {
     private static final String TAG = GTaskManager.class.getSimpleName();
 

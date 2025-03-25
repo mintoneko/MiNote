@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.gtask.data;
 
 import android.appwidget.AppWidgetManager;
@@ -37,7 +21,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/**
+ * 封装数据库笔记记录的ORM类，提供笔记数据与数据库表之间的映射操作。
+ * <p>
+ * 负责通过ContentResolver与系统ContentProvider交互，处理笔记的增删改查操作，
+ * 支持笔记元数据与JSON格式的相互转换。管理笔记基础属性（标题、类型、父目录等）
+ * 及关联的{@link }数据项集合，提供事务提交和版本控制功能。
+ *
+ */
 public class SqlNote {
     private static final String TAG = SqlNote.class.getSimpleName();
 

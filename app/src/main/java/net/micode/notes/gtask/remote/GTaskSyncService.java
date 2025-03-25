@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.gtask.remote;
 
 import android.app.Activity;
@@ -23,6 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
+/**
+ * 后台同步服务（继承自Service）
+ *
+ * 核心功能：
+ * 1. 管理Google Tasks同步的生命周期
+ * 2. 提供开始/取消同步的入口
+ * 3. 通过广播发送同步状态和进度
+ * 4. 处理低内存情况下的同步中断
+ *
+ * 主要组件：
+ * - 同步操作类型常量：定义启动/取消同步的动作标识
+ * - 广播通信机制：通过系统广播传递同步状态
+ * - 异步任务管理：通过GTaskASyncTask执行实际同步操作
+ */
 public class GTaskSyncService extends Service {
     public final static String ACTION_STRING_NAME = "sync_action_type";
 

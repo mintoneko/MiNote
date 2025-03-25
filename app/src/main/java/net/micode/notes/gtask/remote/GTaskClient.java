@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.gtask.remote;
 
 import android.accounts.Account;
@@ -62,35 +46,41 @@ import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
 
+/**
+ * Google Tasks API 客户端（单例模式）
+ * 处理与Google Tasks服务的网络通信、用户认证和任务操作
+ */
 public class GTaskClient {
+    // 类标识
     private static final String TAG = GTaskClient.class.getSimpleName();
 
+    // Google Tasks 接口地址
     private static final String GTASK_URL = "https://mail.google.com/tasks/";
-
     private static final String GTASK_GET_URL = "https://mail.google.com/tasks/ig";
-
     private static final String GTASK_POST_URL = "https://mail.google.com/tasks/r/ig";
 
+    // 单例模式实例
     private static GTaskClient mInstance = null;
 
+    // 网络请求参数
     private DefaultHttpClient mHttpClient;
-
     private String mGetUrl;
-
     private String mPostUrl;
 
+    // 会话状态
     private long mClientVersion;
-
     private boolean mLoggedin;
-
     private long mLastLoginTime;
-
     private int mActionId;
 
+    // 用户账户
     private Account mAccount;
-
     private JSONArray mUpdateArray;
 
+    /**
+     * 私有构造函数（单例模式）
+     * 初始化默认值和空对象
+     */
     private GTaskClient() {
         mHttpClient = null;
         mGetUrl = GTASK_GET_URL;
@@ -103,6 +93,9 @@ public class GTaskClient {
         mUpdateArray = null;
     }
 
+    /**
+     * 获取单例实例
+     */
     public static synchronized GTaskClient getInstance() {
         if (mInstance == null) {
             mInstance = new GTaskClient();
@@ -110,6 +103,16 @@ public class GTaskClient {
         return mInstance;
     }
 
+    /**
+     * 用户登录认证
+     * @param activity 上下文Activity
+     * @return 登录是否成功
+     * 处理逻辑：
+     * 1. 检查5分钟内的有效会话
+     * 2. 验证账户是否变更
+     * 3. 获取新的认证令牌
+     * 4. 尝试标准域名和自定义域名登录
+     */
     public boolean login(Activity activity) {
         // we suppose that the cookie would expire after 5 minutes
         // then we need to re-login
@@ -361,6 +364,11 @@ public class GTaskClient {
         }
     }
 
+    /**
+     * 创建新任务
+     * @param task 要创建的任务对象
+     * @throws NetworkFailureException 网络异常
+     */
     public void createTask(Task task) throws NetworkFailureException {
         commitUpdate();
         try {
@@ -413,6 +421,12 @@ public class GTaskClient {
         }
     }
 
+
+    /**
+     * 提交批量更新
+     * @throws  网络异常
+     * 说明：当更新操作超过10个时会自动提交
+     */
     public void commitUpdate() throws NetworkFailureException {
         if (mUpdateArray != null) {
             try {
@@ -548,6 +562,12 @@ public class GTaskClient {
         }
     }
 
+    /**
+     * 获取指定任务列表的所有任务
+     * @param listGid 任务列表ID
+     * @return 包含所有任务的JSON数组
+     * @throws  网络异常
+     */
     public JSONArray getTaskList(String listGid) throws NetworkFailureException {
         commitUpdate();
         try {

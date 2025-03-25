@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.gtask.data;
 
 import android.database.Cursor;
@@ -31,7 +15,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * 表示可同步的独立任务项，包含任务元数据和同步状态信息。
+ * <p>
+ * 继承自{@link }，提供与Google Task服务交互的核心功能，
+ * 包括任务创建/更新操作、本地数据与远程JSON格式的相互转换，
+ * 以及任务在任务列表中的顺序维护。维护任务完成状态、备注信息，
+ * 并处理本地与服务器端的数据同步冲突。
+ */
 public class Task extends Node {
     private static final String TAG = Task.class.getSimpleName();
 
