@@ -31,7 +31,15 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
-
+/**
+ * Google Tasks同步核心控制器，功能包括：
+ * 1. 管理本地数据库与Google Tasks的双向同步流程
+ * 2. 维护任务ID的映射关系（GID↔NID）
+ * 3. 处理同步冲突检测与解决策略
+ * 4. 协调GTaskClient与本地数据库的交互
+ * 5. 管理同步状态（成功/网络错误/内部错误/取消）
+ * 6. 维护系统文件夹的特殊同步规则
+ */
 public class GTaskManager {
     private static final String TAG = GTaskManager.class.getSimpleName();
 

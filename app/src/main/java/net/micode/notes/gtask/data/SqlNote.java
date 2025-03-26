@@ -21,7 +21,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/**
+ * 数据库笔记实体类，负责：
+ * 1. 本地数据库与Google Task服务的双向数据同步
+ * 2. 笔记数据的持久化存储及版本管理
+ * 3. 通过ContentProvider与系统便签数据库交互
+ * 4. 笔记元数据（标题、父目录、提醒时间等）与JSON格式的互相转换
+ * 5. 管理关联的笔记内容数据（SqlData对象）
+ */
 public class SqlNote {
     private static final String TAG = SqlNote.class.getSimpleName();
 

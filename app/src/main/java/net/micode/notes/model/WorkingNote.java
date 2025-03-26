@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.model;
 
 import android.appwidget.AppWidgetManager;
@@ -31,7 +15,10 @@ import net.micode.notes.data.Notes.NoteColumns;
 import net.micode.notes.data.Notes.TextNote;
 import net.micode.notes.tool.ResourceParser.NoteBgResources;
 
-
+/**
+ * 工作笔记操作类，负责笔记的创建、加载、保存及状态管理
+ * 封装了与数据库交互的核心逻辑，并处理与Widget的联动
+ */
 public class WorkingNote {
     // Note for the working note
     private Note mNote;
@@ -124,6 +111,7 @@ public class WorkingNote {
         loadNote();
     }
 
+
     private void loadNote() {
         Cursor cursor = mContext.getContentResolver().query(
                 ContentUris.withAppendedId(Notes.CONTENT_NOTE_URI, mNoteId), NOTE_PROJECTION, null,
@@ -145,6 +133,7 @@ public class WorkingNote {
         }
         loadNoteData();
     }
+
 
     private void loadNoteData() {
         Cursor cursor = mContext.getContentResolver().query(Notes.CONTENT_DATA_URI, DATA_PROJECTION,
@@ -174,6 +163,15 @@ public class WorkingNote {
         }
     }
 
+    /**
+     * 创建空白笔记的工厂方法
+     * @param context 上下文对象
+     * @param folderId 所属文件夹ID
+     * @param widgetId 关联的小部件ID（无则为INVALID_APPWIDGET_ID）
+     * @param widgetType 小部件类型
+     * @param defaultBgColorId 默认背景颜色ID
+     * @return 新建的WorkingNote实例
+     */
     public static WorkingNote createEmptyNote(Context context, long folderId, int widgetId,
             int widgetType, int defaultBgColorId) {
         WorkingNote note = new WorkingNote(context, folderId);
@@ -183,10 +181,20 @@ public class WorkingNote {
         return note;
     }
 
+    /**
+     * 加载现有笔记
+     * @param context 上下文对象
+     * @param id 要加载的笔记ID
+     * @return 加载后的WorkingNote实例
+     */
     public static WorkingNote load(Context context, long id) {
         return new WorkingNote(context, id, 0);
     }
 
+    /**
+     * 保存笔记变更到数据库
+     * @return true 保存成功，false 保存失败
+     */
     public synchronized boolean saveNote() {
         if (isWorthSaving()) {
             if (!existInDatabase()) {
@@ -212,6 +220,10 @@ public class WorkingNote {
         }
     }
 
+    /**
+     * 判断笔记是否存在于数据库
+     * @return true 已存在，false 未保存
+     */
     public boolean existInDatabase() {
         return mNoteId > 0;
     }
@@ -229,6 +241,11 @@ public class WorkingNote {
         mNoteSettingStatusListener = l;
     }
 
+    /**
+     * 设置笔记提醒时间
+     * @param date 提醒时间戳（毫秒）
+     * @param set 是否设置提醒（true时date需大于0）
+     */
     public void setAlertDate(long date, boolean set) {
         if (date != mAlertDate) {
             mAlertDate = date;
@@ -239,6 +256,10 @@ public class WorkingNote {
         }
     }
 
+    /**
+     * 标记笔记删除状态
+     * @param mark true 标记为删除，false 取消删除标记
+     */
     public void markDeleted(boolean mark) {
         mIsDeleted = mark;
         if (mWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID
@@ -288,6 +309,12 @@ public class WorkingNote {
         }
     }
 
+
+    /**
+     * 转换笔记为通话记录类型
+     * @param phoneNumber 通话号码
+     * @param callDate 通话时间戳（毫秒）
+     */
     public void convertToCallNote(String phoneNumber, long callDate) {
         mNote.setCallData(CallNote.CALL_DATE, String.valueOf(callDate));
         mNote.setCallData(CallNote.PHONE_NUMBER, phoneNumber);
@@ -342,6 +369,9 @@ public class WorkingNote {
         return mWidgetType;
     }
 
+    /**
+     * 笔记设置变更监听接口
+     */
     public interface NoteSettingChangedListener {
         /**
          * Called when the background color of current note has just changed

@@ -4,6 +4,12 @@ import android.database.Cursor;
 
 import org.json.JSONObject;
 
+/**
+ * 任务同步数据结构的抽象基类
+ * 定义同步操作类型常量，管理任务节点的通用属性（GID、名称、最后修改时间、删除状态）
+ * 子类需实现具体的同步动作生成和数据处理逻辑
+ * 支持本地与远程数据双向同步操作（创建/更新/删除）
+ */
 public abstract class Node {
     public static final int SYNC_ACTION_NONE = 0;
 

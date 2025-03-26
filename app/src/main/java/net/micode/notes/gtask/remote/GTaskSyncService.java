@@ -7,6 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 
+/**
+ * Google Tasks同步后台服务，功能包括：
+ * 1. 实现后台同步服务的生命周期管理
+ * 2. 封装同步启动/取消的Intent操作
+ * 3. 通过广播机制通知同步进度
+ * 4. 维护同步任务实例的状态
+ * 5. 处理低内存情况下的同步中断
+ * 6. 提供静态方法供外部控制同步流程
+ */
 public class GTaskSyncService extends Service {
     public final static String ACTION_STRING_NAME = "sync_action_type";
 

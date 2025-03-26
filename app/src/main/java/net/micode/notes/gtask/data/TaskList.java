@@ -13,7 +13,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/**
+ * Google Tasks任务列表管理类，主要功能包括：
+ * 1. 管理任务列表层级结构（包含多个Task子任务）
+ * 2. 生成任务列表的创建/更新同步动作
+ * 3. 维护子任务顺序和索引关系
+ * 4. 处理本地文件夹与远程任务列表的映射转换
+ * 5. 实现任务列表的增删改查操作
+ * 6. 维护系统特殊文件夹（默认笔记、通话记录）的同步规则
+ */
 public class TaskList extends Node {
     private static final String TAG = TaskList.class.getSimpleName();
 

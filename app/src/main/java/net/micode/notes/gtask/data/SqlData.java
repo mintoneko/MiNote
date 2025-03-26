@@ -18,7 +18,15 @@ import net.micode.notes.gtask.exception.ActionFailureException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * 负责本地数据库与任务数据的同步操作
+ * <p>
+ * 功能包括：
+ * - 维护任务数据在SQLite中的存储结构
+ * - 处理数据模型的创建、更新和提交
+ * - 实现JSON与数据库记录的相互转换
+ * - 跟踪数据变更并批量提交
+ */
 public class SqlData {
     private static final String TAG = SqlData.class.getSimpleName();
 

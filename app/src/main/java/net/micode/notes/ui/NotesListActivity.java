@@ -67,6 +67,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 
+/**
+ * 主笔记列表界面，负责：
+ * 1. 显示和管理笔记/文件夹列表
+ * 2. 处理笔记的创建、编辑、删除和移动操作
+ * 3. 实现文件夹的浏览和管理功能
+ * 4. 提供多选操作模式（批量删除/移动）
+ * 5. 处理云端同步相关逻辑
+ * 6. 管理笔记小部件数据
+ * 7. 实现界面个性化设置（背景/字体切换）
+ */
 public class NotesListActivity extends Activity implements OnClickListener, OnItemLongClickListener {
   private static final int FOLDER_NOTE_LIST_QUERY_TOKEN = 0;
 

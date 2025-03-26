@@ -11,7 +11,15 @@ import net.micode.notes.R;
 import net.micode.notes.ui.NotesListActivity;
 import net.micode.notes.ui.NotesPreferenceActivity;
 
-
+/**
+ * Google Tasks异步同步任务控制器，功能包括：
+ * 1. 实现后台同步任务的生命周期管理
+ * 2. 处理同步过程中的通知栏交互（进度/成功/失败）
+ * 3. 封装与GTaskManager的协同工作
+ * 4. 提供同步取消功能
+ * 5. 同步状态回调通知（通过OnCompleteListener）
+ * 6. 同步结果分类处理（网络错误/内部错误/用户取消）
+ */
 public class GTaskASyncTask extends AsyncTask<Void, String, Integer> {
 
     private static int GTASK_SYNC_NOTIFICATION_ID = 5234235;

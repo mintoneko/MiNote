@@ -45,7 +45,15 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-
+/**
+ * Google Tasks API客户端核心类，功能包括：
+ * 1. 管理Google Tasks API的HTTP通信
+ * 2. 处理OAuth认证和会话管理
+ * 3. 封装任务数据的CRUD操作
+ * 4. 维护同步客户端版本及会话状态
+ * 5. 处理JSON请求/响应的序列化与反序列化
+ * 6. 实现网络请求重试及错误处理机制
+ */
 public class GTaskClient {
     private static final String TAG = GTaskClient.class.getSimpleName();
 

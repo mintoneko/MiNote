@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.model;
 import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
@@ -34,12 +18,20 @@ import net.micode.notes.data.Notes.TextNote;
 import java.util.ArrayList;
 
 
+/**
+ * 笔记实体类，负责管理笔记的本地修改和数据库同步
+ */
 public class Note {
     private ContentValues mNoteDiffValues;
     private NoteData mNoteData;
     private static final String TAG = "Note";
+
     /**
-     * Create a new note id for adding a new note to databases
+     * 创建新笔记ID并初始化数据库记录
+     * @param context 上下文对象
+     * @param folderId 所属文件夹ID
+     * @return 新创建的笔记ID
+     * @throws IllegalStateException 如果创建失败会抛出异常
      */
     public static synchronized long getNewNoteId(Context context, long folderId) {
         // Create a new note in the database
@@ -65,17 +57,30 @@ public class Note {
         return noteId;
     }
 
+    /**
+     * 构造函数，初始化笔记修改记录和子数据对象
+     */
     public Note() {
         mNoteDiffValues = new ContentValues();
         mNoteData = new NoteData();
     }
 
+    /**
+     * 设置笔记基础属性值（如标题、文件夹等）
+     * @param key 数据库列名
+     * @param value 要设置的值
+     */
     public void setNoteValue(String key, String value) {
         mNoteDiffValues.put(key, value);
         mNoteDiffValues.put(NoteColumns.LOCAL_MODIFIED, 1);
         mNoteDiffValues.put(NoteColumns.MODIFIED_DATE, System.currentTimeMillis());
     }
 
+    /**
+     * 设置文本类型笔记内容
+     * @param key 数据类型（如CONTENT）
+     * @param value 文本内容
+     */
     public void setTextData(String key, String value) {
         mNoteData.setTextData(key, value);
     }
@@ -96,10 +101,20 @@ public class Note {
         mNoteData.setCallData(key, value);
     }
 
+    /**
+     * 检查是否存在本地修改
+     * @return true 表示有未同步的修改，false 表示无修改
+     */
     public boolean isLocalModified() {
         return mNoteDiffValues.size() > 0 || mNoteData.isLocalModified();
     }
 
+    /**
+     * 将本地修改同步到数据库
+     * @param context 上下文对象
+     * @param noteId 要同步的笔记ID
+     * @return true 同步成功，false 同步失败
+     */
     public boolean syncNote(Context context, long noteId) {
         if (noteId <= 0) {
             throw new IllegalArgumentException("Wrong note id:" + noteId);
@@ -130,6 +145,9 @@ public class Note {
         return true;
     }
 
+    /**
+     * 内部类，管理笔记的具体数据类型（文本/通话记录）
+     */
     private class NoteData {
         private long mTextDataId;
 
