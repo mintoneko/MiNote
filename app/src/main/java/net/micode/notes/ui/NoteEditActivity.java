@@ -60,7 +60,16 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * 笔记编辑核心活动类，主要功能包括：
+ * 1. 提供富文本笔记编辑界面（字体、背景、样式设置）
+ * 2. 支持普通文本模式与待办清单模式的切换
+ * 3. 管理笔记提醒设置（时间、闹钟）
+ * 4. 实现笔记的保存、删除、分享功能
+ * 5. 支持桌面快捷方式创建
+ * 6. 处理笔记内容的高亮搜索匹配显示
+ * 7. 管理笔记的widget关联更新
+ */
 public class NoteEditActivity extends Activity implements OnClickListener,
   NoteSettingChangedListener, OnTextViewChangeListener {
   private class HeadViewHolder {

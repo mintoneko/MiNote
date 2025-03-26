@@ -16,12 +16,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 表示可同步的独立任务项，包含任务元数据和同步状态信息。
- * <p>
- * 继承自{@link }，提供与Google Task服务交互的核心功能，
- * 包括任务创建/更新操作、本地数据与远程JSON格式的相互转换，
- * 以及任务在任务列表中的顺序维护。维护任务完成状态、备注信息，
- * 并处理本地与服务器端的数据同步冲突。
+ * Google Tasks同步任务实体类，功能包括：
+ * 1. 实现任务数据的双向同步（本地数据库 ↔ Google Tasks服务）
+ * 2. 管理任务基础属性（完成状态、备注内容、最后修改时间）
+ * 3. 生成同步动作JSON（创建/更新任务）
+ * 4. 处理任务数据与JSON格式的相互转换
+ * 5. 维护任务层级关系（父子任务列表、兄弟任务顺序）
+ * 6. 处理同步冲突检测及解决策略
  */
 public class Task extends Node {
     private static final String TAG = Task.class.getSimpleName();

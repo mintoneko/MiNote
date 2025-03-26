@@ -32,19 +32,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Google 任务同步管理器（单例模式）
- *
- * 核心职责：
- * 1. 管理本地笔记与Google Tasks服务之间的双向同步
- * 2. 处理同步状态机（成功/网络错误/内部错误等状态）
- * 3. 维护本地与远程数据的映射关系
- * 4. 协调任务列表、元数据和具体笔记的同步流程
- *
- * 主要组件：
- * - 同步状态常量：定义6种同步状态（成功/网络错误/进行中等）
- * - 数据映射表：维护gid-nid双向映射、任务列表缓存等数据结构
- * - 同步处理器：实现init/sync/update等核心同步逻辑
- * - 异常处理：捕获网络异常和内部操作异常
+ * Google Tasks同步核心控制器，功能包括：
+ * 1. 管理本地数据库与Google Tasks的双向同步流程
+ * 2. 维护任务ID的映射关系（GID↔NID）
+ * 3. 处理同步冲突检测与解决策略
+ * 4. 协调GTaskClient与本地数据库的交互
+ * 5. 管理同步状态（成功/网络错误/内部错误/取消）
+ * 6. 维护系统文件夹的特殊同步规则
  */
 public class GTaskManager {
     private static final String TAG = GTaskManager.class.getSimpleName();

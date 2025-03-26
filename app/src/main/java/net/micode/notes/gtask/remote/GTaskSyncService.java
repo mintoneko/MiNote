@@ -8,18 +8,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 /**
- * 后台同步服务（继承自Service）
- *
- * 核心功能：
- * 1. 管理Google Tasks同步的生命周期
- * 2. 提供开始/取消同步的入口
- * 3. 通过广播发送同步状态和进度
- * 4. 处理低内存情况下的同步中断
- *
- * 主要组件：
- * - 同步操作类型常量：定义启动/取消同步的动作标识
- * - 广播通信机制：通过系统广播传递同步状态
- * - 异步任务管理：通过GTaskASyncTask执行实际同步操作
+ * Google Tasks同步后台服务，功能包括：
+ * 1. 实现后台同步服务的生命周期管理
+ * 2. 封装同步启动/取消的Intent操作
+ * 3. 通过广播机制通知同步进度
+ * 4. 维护同步任务实例的状态
+ * 5. 处理低内存情况下的同步中断
+ * 6. 提供静态方法供外部控制同步流程
  */
 public class GTaskSyncService extends Service {
     public final static String ACTION_STRING_NAME = "sync_action_type";

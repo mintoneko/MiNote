@@ -14,6 +14,7 @@ public abstract class Node {
     // 同步动作常量体系（关键同步逻辑标识）
     // 注意：这些值用于决策同步流程方向
 
+ * 支持本地与远程数据双向同步操作（创建/更新/删除）
     /** 无需同步操作 */
     public static final int SYNC_ACTION_NONE = 0;
     /** 需要在远程服务端创建新条目 */

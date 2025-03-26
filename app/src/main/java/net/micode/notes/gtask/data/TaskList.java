@@ -14,13 +14,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * 表示可同步的任务列表数据结构，用于组织和管理多个子任务。
- * <p>
- * 继承自{@link }，提供与Google Task服务同步的核心功能，
- * 包含任务列表的创建、更新操作及本地/远程数据转换。维护子任务集合，
- * 支持添加、删除、排序等管理操作，并处理本地与服务器端的数据同步逻辑。
- *
- * @see  基类提供的基础节点功能
+ * Google Tasks任务列表管理类，主要功能包括：
+ * 1. 管理任务列表层级结构（包含多个Task子任务）
+ * 2. 生成任务列表的创建/更新同步动作
+ * 3. 维护子任务顺序和索引关系
+ * 4. 处理本地文件夹与远程任务列表的映射转换
+ * 5. 实现任务列表的增删改查操作
+ * 6. 维护系统特殊文件夹（默认笔记、通话记录）的同步规则
  */
 public class TaskList extends Node {
     private static final String TAG = TaskList.class.getSimpleName();

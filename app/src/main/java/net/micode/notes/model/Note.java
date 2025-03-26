@@ -18,12 +18,16 @@ import net.micode.notes.data.Notes.TextNote;
 import java.util.ArrayList;
 
 
+/**
+ * 笔记实体类，负责管理笔记的本地修改和数据库同步
+ */
 public class Note {
     // 存储笔记的差异数据，用于记录更改的字段
     private ContentValues mNoteDiffValues;
     // 封装了文本数据和通话数据的内部类对象
     private NoteData mNoteData;
     private static final String TAG = "Note";
+
     /**
      * Create a new note id for adding a new note to databases
      * 创建一个新的笔记，并返回笔记的ID
@@ -154,6 +158,9 @@ public class Note {
         return true;
     }
 
+    /**
+     * 内部类，管理笔记的具体数据类型（文本/通话记录）
+     */
     private class NoteData {
         private long mTextDataId;
 

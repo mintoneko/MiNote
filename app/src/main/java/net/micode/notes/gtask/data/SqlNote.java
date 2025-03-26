@@ -22,12 +22,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * 封装数据库笔记记录的ORM类，提供笔记数据与数据库表之间的映射操作。
- * <p>
- * 负责通过ContentResolver与系统ContentProvider交互，处理笔记的增删改查操作，
- * 支持笔记元数据与JSON格式的相互转换。管理笔记基础属性（标题、类型、父目录等）
- * 及关联的{@link }数据项集合，提供事务提交和版本控制功能。
- *
+ * 数据库笔记实体类，负责：
+ * 1. 本地数据库与Google Task服务的双向数据同步
+ * 2. 笔记数据的持久化存储及版本管理
+ * 3. 通过ContentProvider与系统便签数据库交互
+ * 4. 笔记元数据（标题、父目录、提醒时间等）与JSON格式的互相转换
+ * 5. 管理关联的笔记内容数据（SqlData对象）
  */
 public class SqlNote {
     private static final String TAG = SqlNote.class.getSimpleName();
