@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.ui;
 
 import android.app.Activity;
@@ -28,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Spannable;
@@ -42,6 +27,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -52,6 +38,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.res.ResourcesCompat;
+
+import net.micode.notes.MyApp;
 import net.micode.notes.R;
 import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.TextNote;
@@ -162,8 +151,23 @@ public class NoteEditActivity extends Activity implements OnClickListener,
       finish();
       return;
     }
+
     initResources();
+
   }
+
+  public void setFontToAllChildren(View view, Typeface typeface) {
+    if (view instanceof ViewGroup) {
+      ViewGroup viewGroup = (ViewGroup) view;
+      for (int i = 0; i < viewGroup.getChildCount(); i++) {
+        View child = viewGroup.getChildAt(i);
+        setFontToAllChildren(child, typeface); // 递归调用
+      }
+    } else if (view instanceof TextView) {
+      ((TextView) view).setTypeface(typeface); // 设置字体
+    }
+  }
+
 
   /**
    * Current activity may be killed when the memory is low. Once it is killed, for another time
@@ -266,10 +270,38 @@ public class NoteEditActivity extends Activity implements OnClickListener,
     return true;
   }
 
+  // 需要明确安卓组件周期的几个阶段和每个阶段的功能，放在onCreate是修改不了字体的
   @Override
   protected void onResume() {
     super.onResume();
     initNoteScreen();
+
+    // 绑定实例
+    EditText editText = findViewById(R.id.note_edit_view);
+
+    // 获取字体资源
+    Typeface typeface0 = ResourcesCompat.getFont(this, R.font.a);
+    Typeface typeface1 = ResourcesCompat.getFont(this, R.font.b);
+    Typeface typeface2 = ResourcesCompat.getFont(this, R.font.c);
+    Typeface typeface4 = ResourcesCompat.getFont(this, R.font.d);
+
+    // 通过全局数据获取当前选中的字体
+    String data = ((MyApp) getApplication()).getGlobalData();
+    // Toast.makeText(this, "全局数据：" + data, Toast.LENGTH_SHORT).show(); // 通过Toast调试代码
+    switch (data) {
+      case "0":
+        setFontToAllChildren(editText, typeface0);
+        break;
+      case "1":
+        setFontToAllChildren(editText, typeface1);
+        break;
+      case "2":
+        setFontToAllChildren(editText, typeface2);
+        break;
+      case "3":
+        setFontToAllChildren(editText, typeface4);
+        break;
+    }
   }
 
   private void initNoteScreen() {

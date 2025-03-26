@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+  android:shape="rectangle">
+    <corners
+      android:radius="100dp"/> <!-- 圆角半径足够大形成胶囊形状 -->
+    <solid
+      android:color="#FFF3F3F3"/>
+</shape>

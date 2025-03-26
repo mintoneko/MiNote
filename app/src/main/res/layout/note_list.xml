@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/main_layout"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
   android:background="@drawable/list_background1">
 
   <LinearLayout
+    android:id="@+id/test1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -15,6 +17,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:background="@drawable/title_bar_bg"
+      android:fontFamily="@font/a"
       android:gravity="center_vertical"
       android:singleLine="true"
       android:textColor="#FFEAD1AE"
@@ -47,8 +50,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="end|bottom"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="60dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="80dp"
+    android:width="100dp"
+    android:background="@drawable/oval_button_bg"
     android:text="@string/change_background" />
 
   <!-- 新增字体切换按钮 -->
@@ -57,8 +62,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="start|bottom"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="60dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginBottom="80dp"
+    android:width="100dp"
+    android:background="@drawable/oval_button_bg"
+    android:onClick="onFontChangeClick"
     android:text="@string/change_font" />
 
 </FrameLayout>

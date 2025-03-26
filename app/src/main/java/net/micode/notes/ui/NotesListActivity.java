@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.micode.notes.ui;
 
 import android.app.Activity;
@@ -28,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -49,17 +34,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.micode.notes.MyApp;
 import net.micode.notes.R;
 import net.micode.notes.data.Notes;
 import net.micode.notes.data.Notes.NoteColumns;
@@ -67,6 +55,7 @@ import net.micode.notes.gtask.remote.GTaskSyncService;
 import net.micode.notes.model.WorkingNote;
 import net.micode.notes.tool.BackupUtils;
 import net.micode.notes.tool.DataUtils;
+import net.micode.notes.tool.FontManager;
 import net.micode.notes.tool.ResourceParser;
 import net.micode.notes.ui.NotesListAdapter.AppWidgetAttribute;
 import net.micode.notes.widget.NoteWidgetProvider_2x;
@@ -137,16 +126,81 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
   private final static int REQUEST_CODE_OPEN_NODE = 102;
   private final static int REQUEST_CODE_NEW_NODE = 103;
 
+
+  private int currentBgIndex = 1;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     super.onCreate(savedInstanceState);
     setContentView(R.layout.note_list);
     initResources();
 
-    /**
-     * Insert an introduction when user firstly use this application
-     */
+    // 新增代码：获取布局和按钮
+    FrameLayout mainLayout = findViewById(R.id.main_layout);
+    Button changeBgBtn = findViewById(R.id.btn_change_bg);
+
+    // 设置背景切换点击事件
+    changeBgBtn.setOnClickListener(v -> {
+      currentBgIndex = currentBgIndex % 3 + 1; // 循环0-1-2
+      int resId = getResources().getIdentifier(
+        "list_background" + currentBgIndex,
+        "drawable",
+        getPackageName()
+      );
+      mainLayout.setBackgroundResource(resId);
+      Toast.makeText(this, "已切换到背景" + Integer.toString(currentBgIndex-1), Toast.LENGTH_SHORT).show();
+    });
+
+    // 原有代码保持不变
     setAppInfoFromRawRes();
+
+    // 应用当前字体
+    applyGlobalFont();
+
+    // 添加以下代码到现有onCreate方法中
+    Button btnChangeFont = findViewById(R.id.change_font);
+    btnChangeFont.setOnClickListener(v -> {
+      toggleApplicationFont();
+      recreate(); // 重新创建Activity以应用新字体
+    });
+  }
+
+  // 字体切换逻辑
+  private void toggleApplicationFont() {
+    SharedPreferences prefs = getSharedPreferences("app_font", MODE_PRIVATE);
+    int currentFont = prefs.getInt("current_font", 0);
+    currentFont = (currentFont + 1) % 4; // 循环切换3种字体
+    prefs.edit().putInt("current_font", currentFont).apply();
+    String s = Integer.toString(currentFont);
+    Toast.makeText(this, "已切换到第" + s + "号字体", Toast.LENGTH_SHORT).show();
+    ((MyApp) getApplication()).setGlobalData(s);
+  }
+
+  // 递归应用字体到所有视图
+  private void applyGlobalFont() {
+    Typeface typeface = FontManager.getCurrentFont(this);
+
+    // 只处理指定根布局
+    View mainLayout = findViewById(R.id.main_layout);
+    View noteEditLayout = findViewById(R.id.note_edit_view);
+
+    if (mainLayout != null) {
+      applyFontToView(mainLayout, typeface);
+    }
+    if (noteEditLayout != null) {
+      applyFontToView(noteEditLayout, typeface);
+    }
+  }
+
+  private void applyFontToView(View view, Typeface typeface) {
+    if (view instanceof ViewGroup) {
+      for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+        applyFontToView(((ViewGroup) view).getChildAt(i), typeface);
+      }
+    } else if (view instanceof TextView) {
+      ((TextView) view).setTypeface(typeface);
+    }
   }
 
   @Override

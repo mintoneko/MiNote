@@ -1,20 +1,4 @@
-/*
- * Copyright (c) 2010-2011, The MiCode Open Source Community (www.micode.net)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
- package net.micode.notes.ui;
+package net.micode.notes.ui;
 
  import android.content.Context;
  import android.graphics.Rect;
@@ -31,7 +15,9 @@
  import android.view.MenuItem.OnMenuItemClickListener;
  import android.view.MotionEvent;
  import android.widget.EditText;
- 
+ import android.widget.Toast;
+
+ import net.micode.notes.MyApp;
  import net.micode.notes.R;
  
  import java.util.HashMap;
@@ -41,7 +27,7 @@
   * NoteEditText 是一个自定义的 EditText，用于处理笔记编辑中的特殊行为。
   * 它支持链接点击、键盘事件处理以及动态文本变化监听。
   */
- public class NoteEditText extends EditText {
+ public class NoteEditText extends androidx.appcompat.widget.AppCompatEditText {
      private static final String TAG = "NoteEditText"; // 日志标签
      private int mIndex; // 当前编辑框的索引
      private int mSelectionStartBeforeDelete; // 删除键按下前的光标位置

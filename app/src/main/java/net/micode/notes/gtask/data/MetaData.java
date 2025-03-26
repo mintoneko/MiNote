@@ -8,10 +8,7 @@ import net.micode.notes.tool.GTaskStringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * 元数据管理类，继承自Task，用于处理与Google Task相关的元数据
- * 注意：此类专门处理元数据，不支持本地JSON操作和同步操作
- */
+
 public class MetaData extends Task {
     //目标日志
     private final static String TAG = MetaData.class.getSimpleName();
