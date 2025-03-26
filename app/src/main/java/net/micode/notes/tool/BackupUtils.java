@@ -19,15 +19,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-
 /**
  * 笔记数据备份核心工具类
- *
+ * <p>
  * 核心功能：
  * 1. 实现笔记数据到文本文件的完整导出流程
  * 2. 保障备份操作的原子性（全量导出或失败回滚）
  * 3. 多线程安全设计（单例模式+同步锁）
- *
+ * <p>
  * 备份策略：
  * - 文件命名：note_yyyyMMdd.txt（防止重复覆盖）
  * - 存储路径：/sdcard/micronotes/

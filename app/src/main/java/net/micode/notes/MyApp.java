@@ -7,11 +7,11 @@ public class MyApp extends Application {
   // 全局共享数据，初始值为"0"
   private String globalData = "0";
 
-  @Override
   /**
    * 应用创建时调用，进行全局初始化
    * 可以在此初始化数据库连接、第三方库等
    */
+  @Override
   public void onCreate() {
     super.onCreate();
     // 这里可以初始化全局数据

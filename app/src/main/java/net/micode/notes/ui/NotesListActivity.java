@@ -159,7 +159,7 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
         getPackageName()
       );
       mainLayout.setBackgroundResource(resId);
-      Toast.makeText(this, "已切换到背景" + Integer.toString(currentBgIndex-1), Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, "已切换到背景" + Integer.toString(currentBgIndex - 1), Toast.LENGTH_SHORT).show();
     });
 
     // 原有代码保持不变

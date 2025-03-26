@@ -2,13 +2,13 @@ package net.micode.notes.tool;
 
 /**
  * Google Tasks API 字符串常量工具类
- *
+ * <p>
  * 功能概述：
  * 1. 定义与Google Tasks API交互时使用的JSON字段名称
  * 2. 维护任务数据结构中的固定值常量
  * 3. 提供MIUI笔记特有的文件夹命名规范
  * 4. 包含元数据存储的标识定义
- *
+ * <p>
  * 设计说明：
  * - 所有字段均为public final static常量，确保全局唯一性
  * - 常量命名遵循GTASK_JSON_前缀表示API字段，MIUI_前缀表示平台特定值

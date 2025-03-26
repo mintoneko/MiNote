@@ -11,7 +11,6 @@ import net.micode.notes.R;
 import net.micode.notes.ui.NotesListActivity;
 import net.micode.notes.ui.NotesPreferenceActivity;
 
-
 /**
  * 异步任务类，用于处理Google Tasks的同步操作
  */
