@@ -218,3 +218,89 @@ graph TD
    ```
 
 ## 新功能
+
+先对应添加布局，然后添加功能实现即可。
+
+```xml
+<!-- 新增背景切换按钮 -->
+<Button
+  android:id="@+id/btn_change_bg"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_gravity="end|bottom"
+  android:layout_marginEnd="10dp"
+  android:layout_marginBottom="80dp"
+  android:width="100dp"
+  android:background="@drawable/oval_button_bg"
+  android:text="@string/change_background" />
+
+<!-- 新增字体切换按钮 -->
+<Button
+  android:id="@+id/change_font"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_gravity="start|bottom"
+  android:layout_marginStart="10dp"
+  android:layout_marginBottom="80dp"
+  android:width="100dp"
+  android:background="@drawable/oval_button_bg"
+  android:text="@string/change_font" />
+```
+
+### 切换背景
+
+核心代码：
+
+![image-20250325210657068](images/image-20250325210657068.png)
+
+展示图：
+
+![pic1](images/pic1.jpg)
+
+初始化视图、点击事件处理、动态资源加载和背景设置。
+
+### 更改字体
+
+核心代码：
+
+![image-20250326100525736](images/image-20250326100525736.png)
+
+字体管理类，对应左侧导入的字体。
+
+![image-20250326100317145](images/image-20250326100317145.png)
+
+绑定布局。
+
+```java
+package net.micode.notes;
+
+import android.app.Application;
+
+// 自定义Application类
+public class MyApp extends Application {
+  private String globalData="0";
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    // 这里可以初始化全局数据
+  }
+
+  // 线程安全的getter/setter
+  public synchronized String getGlobalData() {
+    return globalData;
+  }
+
+  public synchronized void setGlobalData(String data) {
+    this.globalData = data;
+  }
+}
+```
+
+全局共享数据，用来组件之间的通信。
+
+展示图：
+
+![pic2](images/pic2.jpg)
+
+![pic3](images/pic3.jpg)

@@ -7,6 +7,7 @@
   android:background="@drawable/list_background1">
 
   <LinearLayout
+    android:id="@+id/test1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -16,6 +17,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:background="@drawable/title_bar_bg"
+      android:fontFamily="@font/a"
       android:gravity="center_vertical"
       android:singleLine="true"
       android:textColor="#FFEAD1AE"
@@ -64,6 +66,7 @@
     android:layout_marginBottom="80dp"
     android:width="100dp"
     android:background="@drawable/oval_button_bg"
+    android:onClick="onFontChangeClick"
     android:text="@string/change_font" />
 
 </FrameLayout>
