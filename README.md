@@ -304,3 +304,7 @@ public class MyApp extends Application {
 ![pic2](images/pic2.jpg)
 
 ![pic3](images/pic3.jpg)
+
+## 分支管理
+
+![branch](images/branch.png)
